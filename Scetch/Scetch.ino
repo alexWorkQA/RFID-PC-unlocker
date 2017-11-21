@@ -39,7 +39,7 @@
 MFRC522 mfrc522 ( SS_PIN, RST_PIN ) ;
 char Enter = KEY_RETURN;                //Return key is declared as Enter.
 String readid;
-String card1="48b45a10";                //Change this value to the UID of your card.
+String card1="96f5a6e5";                //Change this value to the UID of your card.
  
 void setup( ) 
 {
@@ -47,6 +47,7 @@ void setup( )
  Keyboard.begin();
  SPI.begin();
  mfrc522.PCD_Init();
+ 
 }
 
 void temp(byte *buffer, byte bufferSize)//function to store card uid as a string datatype.
@@ -71,14 +72,18 @@ void loop( )
  temp(mfrc522.uid.uidByte, mfrc522.uid.size);
  if(readid==card1)
  { 
-  Keyboard.press(KEY_LEFT_GUI);              //Press the left windows key.
-  Keyboard.press('l');                       //Press the "l" key.
+  //Keyboard.press(KEY_LEFT_GUI);              //Press the left windows key.
+  //Keyboard.press('l');
+  //Press the "l" key.
+  Keyboard.press(KEY_LEFT_CTRL);
+  Keyboard.press(KEY_LEFT_ALT);
+  Keyboard.press(KEY_DELETE);
   Keyboard.releaseAll();                     //Release all keys.
   delay (100);
   Keyboard.press(Enter);                     //Press the Enter key.
   Keyboard.release(Enter);                   //Release the Enter key.
   delay(100);
-  Keyboard.print("PASSWORD");                    // Change this value to your Windows PIN/Password.
+  Keyboard.print("31415926535@Pi");                    // Change this value to your Windows PIN/Password.
   Keyboard.releaseAll();
   delay(100);
   Keyboard.press(Enter);
